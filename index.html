@@ -1,44 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SM Catch Game</title>
-<link rel="stylesheet" href="style.css">
-</head>
- 
-<body>
- 
-<div id="hud">
-<div class="panel">
-<div id="lives">❤️❤️❤️</div>
- 
-<div class="label">TIME</div>
-<div class="value" id="time">00:00</div>
- 
-<div class="label">SCORE</div>
-<div class="value" id="score">0</div>
-</div>
-</div>
- 
-<div id="game">
-<div id="cart">
-   <img src="assets/cart2.png" id="cartImg" draggable="false">
-</div>
- 
-<div id="gameOver">
-<h2>Game Over</h2>
-<button onclick="restart()">Play Again</button>
-</div>
-</div>
- 
-<div id="hudLB">
-<div id="leaderboard">
-<h3>Leaderboard</h3>
-<div id="ranks"></div>
-</div>
-</div>
- 
-<script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SM Catch Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="hud">
+      <div class="panel">
+        <div id="lives">❤️❤️❤️</div>
+
+        <div class="label">TIME</div>
+        <div class="value" id="time">00:00</div>
+
+        <div class="label">SCORE</div>
+        <div class="value" id="score">0</div>
+      </div>
+    </div>
+
+    <div id="game">
+      <div id="cart">
+        <img src="assets/cart2.png" id="cartImg" draggable="false" />
+      </div>
+
+      <div id="gameOver">
+        <h2 id="GameOverText"><img src="assets/Game-Over-Yellow.png" alt=""></h2>
+        <button onclick="restart()">Play Again</button>
+      </div>
+    </div>
+
+    <div id="hudLB">
+      <div id="leaderboard">
+        <h3>Leaderboard</h3>
+        <div id="ranks"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
