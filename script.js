@@ -145,7 +145,7 @@ const r1 = obj.el.getBoundingClientRect();
  
 const itemCenterX = r1.left + r1.width / 2;
 const inCenterZone =
-Math.abs(itemCenterX - cartCenterX) < cartRect.width * 0.20;
+Math.abs(itemCenterX - cartCenterX) < cartRect.width * 0.24;
  
 const verticalTouch = r1.bottom >= cartRect.top + (cartRect.height *0.3);
  
