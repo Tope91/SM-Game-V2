@@ -30,7 +30,6 @@ body::before {
 
 .panel {
   background: rgba(0, 42, 255, 1);
-  color: #ffffff;
   padding: 15px;
   border-radius: 12px;
   text-align: center;
@@ -48,6 +47,7 @@ body::before {
 
 .value {
   background: white;
+  color: #000000;
   padding: 8px;
   border-radius: 6px;
   margin-top: 5px;
@@ -95,7 +95,6 @@ body::before {
 /* LEADERBOARD */
 #leaderboard {
   background: rgba(0, 42, 255, 1);
-  color: #000000;
   padding: 15px;
   border-radius: 12px;
   text-align: center;
@@ -111,6 +110,8 @@ body::before {
 
 .rank {
   background: #fff;
+  color: #000;
+  font-weight: bolder;
   margin: 5px 0;
   padding: 6px;
   display: flex;
