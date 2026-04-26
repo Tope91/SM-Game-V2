@@ -7,7 +7,7 @@ const scale = game.clientWidth / BASE_WIDTH;
 let score = 0;
 let lives = 3;
 let time = 0;
-let running = true;
+let running = false;
 
 /* SOUND */
 const catchSound = new Audio(
@@ -100,6 +100,7 @@ document.addEventListener("keydown", (e) => {
 /* ITEMS */
 const items = ["🧸", "🍎", "🎁", "📦", "📱", "🎧", "💻"];
 const bomb = "💣";
+const bonus = "🌟";
 
 let dropSpeed = 4 * scale;
 let spawnDelay = 2000 / scale;
@@ -210,11 +211,38 @@ function gameOver() {
   saveScore(score);
   updateLeaderboard();
   document.getElementById("gameOver").style.display = "block";
+
+  
 }
 
 /* RESTART */
 function restart() {
-  location.reload();
+  // reset values
+  score = 0;
+  lives = 3;
+  time = 0;
+  dropSpeed = 4 * scale;
+  spawnDelay = 2000 / scale;
+
+  activeItems.forEach((i) => i.el.remove());
+  activeItems = [];
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("time").textContent = "00:00";
+  updateLives();
+
+  document.getElementById("gameOver").style.display = "none";
+  document.getElementById("startScreen").style.display = "flex";
+}
+
+/*New Game */
+function startGame() {
+  running = true;
+
+  document.getElementById("startScreen").style.display = "none";
+
+  spawnOne();
+  requestAnimationFrame(update);
 }
 
 /* LEADERBOARD */
@@ -243,6 +271,7 @@ function updateLeaderboard() {
 
 /* INIT (SAFE ORDER) */
 window.onload = () => {
+  document.getElementById("startBtn").addEventListener("click", startGame);
   calculateLanes();
   setCartToLane(4);
   updateLeaderboard();
