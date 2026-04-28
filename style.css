@@ -79,7 +79,7 @@ body::before {
 
 #cart img {
   width: 18vw;
-  max-width: 4vw;
+  max-width: 180px;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
