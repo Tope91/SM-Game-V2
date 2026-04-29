@@ -5,12 +5,12 @@ body {
   height: 100vh;
   overflow: hidden;
   color: white;
-
+ 
   background: url("assets/2022_SM_Supermalls_Logo.png") no-repeat center center;
   background-size: contain;
   background-attachment: fixed;
 }
-
+ 
 /* optional dark overlay */
 body::before {
   content: "";
@@ -19,7 +19,7 @@ body::before {
   background: transparent;
   z-index: -1;
 }
-
+ 
 /* HUD */
 #hud {
   margin-top: 15%;
@@ -27,14 +27,14 @@ body::before {
   padding: 15px;
   box-sizing: border-box;
 }
-
+ 
 .panel {
   background: rgba(0, 42, 255, 1);
   padding: 15px;
   border-radius: 12px;
   text-align: center;
 }
-
+ 
 .label {
   margin-top: 10px;
   font-weight: bold;
@@ -44,7 +44,7 @@ body::before {
   -1px 1px 0 #000,
   1px 1px 0 #000;
 }
-
+ 
 .value {
   background: white;
   color: #000000;
@@ -52,7 +52,7 @@ body::before {
   border-radius: 6px;
   margin-top: 5px;
 }
-
+ 
 /* GAME */
 #game {
   aspect-ratio: 2.85 / 1;
@@ -67,7 +67,7 @@ body::before {
   background: transparent;
   cursor: pointer;
 }
-
+ 
 /* CART */
 #cart {
   position: absolute;
@@ -76,22 +76,22 @@ body::before {
   transform: translateX(-50%);
   transition: left 0.1s;
 }
-
+ 
 #cart img {
   width: 18vw;
-  max-width: 180px;
+  max-width: 9vw;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
 }
-
+ 
 /* ITEMS */
 .item {
   position: absolute;
   font-size: 3vw;
   top: -50px;
 }
-
+ 
 /* LEADERBOARD */
 #leaderboard {
   background: rgba(0, 42, 255, 1);
@@ -99,7 +99,7 @@ body::before {
   border-radius: 12px;
   text-align: center;
 }
-
+ 
 #hudLB {
   margin-top: 8%;
   width: 40%;
@@ -107,7 +107,7 @@ body::before {
   box-sizing: content-box;
   background: transparent;
 }
-
+ 
 .rank {
   background: #fff;
   color: #000;
@@ -118,7 +118,7 @@ body::before {
   justify-content: space-between;
   border-radius: 5px;
 }
-
+ 
 /* GAME OVER */
 #gameOver {
   z-index: 99999999;
@@ -132,20 +132,20 @@ body::before {
   border-radius: 30px;
   text-align: center;
 }
-
+ 
 #GameOverText {
-  font-size: 6vw;
+  font-size: 2vw;
   text-shadow: #000;
 }
-
+ 
 #gameOver button {
   margin-top: 5px;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 0.94vw;
   font-weight: bolder;
   cursor: pointer;
 }
-
+ 
 /* START SCREEN */
 #startScreen {
  position: absolute;
@@ -161,12 +161,12 @@ body::before {
 #startBtn {
   margin-top: 1px;
   padding: 5px 20px;
-  font-size: 18px;
+  font-size: 0.94vw;
   font-weight: bolder;
   cursor: pointer;
 }
  
 #GameStartText {
-  font-size: 3vw;
+  font-size: 2vw;
   text-shadow: #000;
 }
