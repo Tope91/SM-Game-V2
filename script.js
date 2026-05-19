@@ -1,34 +1,47 @@
 const game = document.getElementById("game");
 const cart = document.getElementById("cart");
 const cartImg = document.getElementById("cartImg");
+ 
 const BASE_WIDTH = 1920;
  
 function getScale() {
 return game.clientWidth / BASE_WIDTH;
 }
  
+/* ✅ SCALE TO SCREEN */
+function scaleToScreen() {
+const scaleX = window.innerWidth / 1920;
+const scaleY = window.innerHeight / 1080;
+ 
+const scale = Math.min(scaleX, scaleY);
+ 
+game.style.transform = `scale(${scale})`;
+ 
+const offsetX = (window.innerWidth - 1920 * scale) / 2;
+const offsetY = (window.innerHeight - 1080 * scale) / 2;
+ 
+game.style.left = offsetX + "px";
+game.style.top = offsetY + "px";
+}
+ 
+/* GAME STATE */
 let score = 0;
 let lives = 3;
 let time = 0;
 let running = false;
  
 /* SOUND */
-const catchSound = new Audio(
-"https://www.soundjay.com/buttons/sounds/button-3.mp3",
-);
-const boomSound = new Audio(
-"https://www.soundjay.com/explosion/sounds/explosion-01.mp3",
-);
+const catchSound = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+const boomSound = new Audio("https://www.soundjay.com/explosion/sounds/explosion-01.mp3");
  
 /* LANES */
 let lanes = [];
  
-/* ✅ CENTERED LANES (FIXED) */
 function calculateLanes() {
 const gameWidth = game.clientWidth;
  
 const laneCount = 8;
-const playAreaWidth = gameWidth * 0.7; // adjust if needed
+const playAreaWidth = gameWidth * 0.7;
  
 const laneSpacing = playAreaWidth / (laneCount - 1);
 const startX = (gameWidth - playAreaWidth) / 2;
@@ -53,7 +66,6 @@ cart.style.left = lanes[currentLaneIndex] + "px";
 cart.style.transform = "translateX(-50%)";
 }
  
-/* MOVE BY POSITION */
 function moveCart(x) {
 const rect = game.getBoundingClientRect();
 const relativeX = x - rect.left;
@@ -72,7 +84,7 @@ lanes.forEach((lane, i) => {
 setCartToLane(closestIndex);
 }
  
-/* INPUTS */
+/* INPUT */
 game.addEventListener("click", (e) => moveCart(e.clientX));
 game.addEventListener("touchstart", (e) => moveCart(e.touches[0].clientX));
  
@@ -93,26 +105,18 @@ moveCart(e.touches[0].clientX);
 document.addEventListener("keydown", (e) => {
 if (!running) return;
  
-if (e.key === "ArrowLeft") {
-  setCartToLane(currentLaneIndex - 1);
-}
- 
-if (e.key === "ArrowRight") {
-  setCartToLane(currentLaneIndex + 1);
-}
+if (e.key === "ArrowLeft") setCartToLane(currentLaneIndex - 1);
+if (e.key === "ArrowRight") setCartToLane(currentLaneIndex + 1);
 });
  
 /* ITEMS */
-const items = ["🧸", "🍎", "🎁", "📦", "📱", "🎧", "💻"];
+const items = ["🧸","🍎","🎁","📦","📱","🎧","💻"];
 const bomb = "💣";
-const bonus = "🌟";
  
 let dropSpeed = 4 * getScale();
 let spawnDelay = 2000 / getScale();
- 
 let activeItems = [];
  
-/* SPAWN */
 function spawnOne() {
 if (!running || lanes.length === 0) return;
  
@@ -122,18 +126,12 @@ const el = document.createElement("div");
 el.className = "item";
  
 let isBomb = Math.random() < 0.15;
-el.textContent = isBomb
-  ? bomb
-  : items[Math.floor(Math.random() * items.length)];
+el.textContent = isBomb ? bomb : items[Math.floor(Math.random() * items.length)];
  
 el.style.left = lane + "px";
 game.appendChild(el);
  
-activeItems.push({
-  el,
-  y: -50,
-  isBomb,
-});
+activeItems.push({ el, y: -50, isBomb });
  
 setTimeout(spawnOne, spawnDelay);
  
@@ -157,13 +155,10 @@ for (let i = activeItems.length - 1; i >= 0; i--) {
   const r1 = obj.el.getBoundingClientRect();
  
   const itemCenterX = r1.left + r1.width / 2;
-  const inCenterZone =
-   Math.abs(itemCenterX - cartCenterX) < cartRect.width * 0.24;
+  const inCenterZone = Math.abs(itemCenterX - cartCenterX) < cartRect.width * 0.24;
  
-  const verticalTouch =
-   r1.bottom >= cartRect.top + cartRect.height * 0.3;
+  const verticalTouch = r1.bottom >= cartRect.top + cartRect.height * 0.3;
  
-  /* CATCH */
   if (verticalTouch && inCenterZone) {
    if (obj.isBomb) {
     boomSound.play();
@@ -179,7 +174,6 @@ for (let i = activeItems.length - 1; i >= 0; i--) {
    continue;
   }
  
-  /* MISS */
   if (obj.y > game.clientHeight) {
    if (!obj.isBomb) {
     lives--;
@@ -204,9 +198,7 @@ let m = Math.floor(time / 60);
 let s = time % 60;
  
 document.getElementById("time").textContent =
-  String(m).padStart(2, "0") +
-  ":" +
-  String(s).padStart(2, "0");
+  String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
 }, 1000);
  
 /* LIVES */
@@ -242,7 +234,7 @@ document.getElementById("gameOver").style.display = "none";
 document.getElementById("startScreen").style.display = "flex";
 }
  
-/* START GAME */
+/* START */
 function startGame() {
 running = true;
  
@@ -283,19 +275,20 @@ arr.forEach((s, i) => {
 });
 }
  
-/* RESIZE FIX */
+/* RESIZE */
 window.addEventListener("resize", () => {
 calculateLanes();
 setCartToLane(currentLaneIndex);
+scaleToScreen();
 });
  
 /* INIT */
 window.onload = () => {
-document
-  .getElementById("startBtn")
-  .addEventListener("click", startGame);
+document.getElementById("startBtn").addEventListener("click", startGame);
  
 calculateLanes();
 setCartToLane(4);
 updateLeaderboard();
+ 
+scaleToScreen();
 };
